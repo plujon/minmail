@@ -1,0 +1,5 @@
+X("image/jpeg", "jpg")
+X("image/png", "png")
+X("text/html", "html")
+X("text/x-amp-html", "html")
+X("text/plain", "txt")

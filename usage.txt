@@ -1,0 +1,50 @@
+Usage:
+
+  minmail [files]
+  minmail --wreak-havok [files]
+
+Description:
+
+  Extract parts of RFC 822 message files, such as those found beneath
+  ~/Maildir, into separate files in a subdirectory named "pieces" that
+  is created if necessary in the current working directory.
+
+  In the first form (without --wreak-havok), the original mail files
+  are untouched, and the pieces subdirectory is populated.
+
+  If --wreak-havok is given, the original mail files will be
+  overwritten with "minimal" RFC 822 messages that have:
+
+  1. no attachments
+
+  2. no alternate parts (text/plain if available, otherwise text/html)
+
+  3. fewer mail headers
+
+Options:
+
+  --wreak-havok   # modify the original mail file(s)
+
+Examples:
+
+  # Extract parts from a single message into pieces/ .  E.g.,
+  # pieces/20210615.195257.j@example.com.01.txt
+  # pieces/20210615.195257.j@example.com.02.html
+  # pieces/20210615.195257.j@example.com.03.png
+  minmail message.eml  # creates files in pieces, e.g.,
+
+  # Extract parts from all mail files in a single Maildir folder named
+  # "Read".
+  find ~/Maildir/Read -maxdepth 2 -type f | xargs minmail
+
+  # In addition to extracting parts, modify the original message to
+  # make it minimal.
+  minmail --wreak-havok message.eml
+
+Caveats:
+
+  THIS PROGRAM MAY DESTROY YOUR MAIL.
+
+  MAKE A BACKUP BEFORE USING.
+
+  CAVEAT EMPTOR.
