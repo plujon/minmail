@@ -21,7 +21,7 @@ typedef struct a_mail_file {
   char *backup_path;
   char *pieces_base;
   GMimeMessage *message;
-  GMimeObject *text_part;
+  GMimePart *text_part;
   int part_count;
   int eno;
 } a_mail_file;
