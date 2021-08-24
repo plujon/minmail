@@ -19,10 +19,12 @@ const char *losers[] = {
 void
 min_headers(a_mail_file *mf)
 {
-  GMimeMessage *message = mf->message;
+  GMimeObject *message = (GMimeObject *)mf->message;
   for (unsigned i = 0; i < (sizeof(losers)/sizeof(losers[0])); ++i) {
-    if (g_mime_object_remove_header((GMimeObject *)message, losers[i])) {
+    if (g_mime_object_remove_header(message, losers[i])) {
       dbgf(3, "removed %s", losers[i]);
     }
   }
+  if (!g_mime_object_get_header(message, "X-MinMail"))
+    g_mime_object_append_header(message, "X-MinMail", "0.0.1", "us-ascii");
 }
